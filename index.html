@@ -13,8 +13,8 @@
   <title>Bootstrap with sass</title>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4">
+<body id="home" data-spy="scroll" data-target="#main-nav">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
     <div class="container">
       <a href="#home" class="navbar-brand">
         <img src="img/mlogo.png" width="50" height="50" alt="logo">
@@ -373,6 +373,19 @@
     </div><!--  end of container -->
   </section>
 
+  <!-- FOOTER -->
+  <section id="main-footer" class="py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-6 ml-auto">
+        <p class="lead">
+          Copyright &copy; <span id="year"></span>
+        </p>
+        </div>
+      </div><!-- end of row -->
+    </div><!-- end of container -->
+  </section>
+
 
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
@@ -384,6 +397,26 @@
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
+
+    // Init Scrollspy
+    $('body').scrollspy({target: '#main-nav'});
+
+    // Smooth Scrolling
+    $("#main-nav a").on('click', function (event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+
+        const hash = this.hash;
+
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 800, function () {
+
+          window.location.hash = hash;
+        });
+      }
+    });
+
   </script>
 </body>
 
